@@ -15,6 +15,8 @@ const app = firebase.apps.length
     ? firebase.app()
     : firebase.initializeApp(firebaseConfig)
 
+console.log(app)
+
 export const persistenceMode = firebase.auth.Auth.Persistence.LOCAL
 
 export default app
