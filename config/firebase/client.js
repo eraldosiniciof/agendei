@@ -17,4 +17,4 @@ const app = firebaseClient.apps.length
 
 export const persistenceMode = firebaseClient.auth.Auth.Persistence.LOCAL
 
-export { firebaseClient }
+export default firebaseClient
