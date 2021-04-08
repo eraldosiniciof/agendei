@@ -18,7 +18,6 @@ import {
 } from '@chakra-ui/react'
 
 import { Logo, useAuth } from '../components'
-import { useElementScroll } from 'framer-motion'
 
 const validationSchema = yup.object().shape({
   email: yup.string().email('E-mail inválido').required('Preenchimento obrigatório'),
@@ -81,7 +80,7 @@ export default function Home() {
         </FormControl>
 
         <Box p={4}>
-          <Button colorScheme='blue' width='100%' onClick={handleSubmit} isLoading={isSubmitting}>Cadastrar</Button>
+          <Button colorScheme='blue' width='100%' onClick={handleSubmit} isLoading={isSubmitting}>Entrar</Button>
         </Box>
 
       </Box>
