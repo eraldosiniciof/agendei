@@ -9,7 +9,7 @@ export const logout = () => firebaseClient.auth().signOut()
 
 export const login = async ({ email, password }) => {
     firebaseClient.auth().setPersistence(persistenceMode)
-    
+
     try {
         await firebaseClient.auth().signInWithEmailAndPassword(email, password)
         return firebaseClient.auth().currentUser
@@ -21,10 +21,9 @@ export const login = async ({ email, password }) => {
 
 export const signup = async ({ email, password, username }) => {
     try {
-        // await firebaseClient.auth().createUserWithEmailAndPassword(email, password)
+        await firebaseClient.auth().createUserWithEmailAndPassword(email, password)
         const user = await login({ email, password })
         const token = await user.getIdToken()
-        console.log(token)
 
         const { data } = await axios({
             method: 'post',
@@ -39,7 +38,7 @@ export const signup = async ({ email, password, username }) => {
         console.log(data)
 
     } catch (error) {
-        console.log('SIGNUP ERROR: ', error)
+        console.log('SIGNUP ERROR: ', error.message)
     }
 }
 
