@@ -5,9 +5,9 @@ import axios from 'axios'
 import { addDays, format, subDays } from 'date-fns'
 
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
-import { Button, Container, Box, IconButton, SimpleGrid, Spinner } from '@chakra-ui/react'
+import { Button, Container, Box, IconButton, SimpleGrid, Spinner, ModalOverlay, ModalContent, ModalFooter } from '@chakra-ui/react'
 
-import { useAuth, Logo, formatDate } from './../components'
+import { formatDate, useAuth, Logo, TimeBlock} from './../components'
 
 const getSchedule = async (when) => axios({
     method: 'get',
@@ -20,14 +20,6 @@ const Header = ({ children }) => (
         {children}
     </Box>
 )
-
-const TimeBlock = ({ time }) => {
-    return (
-        <Button p={8} bg="blue.500" color="white">
-            {time}
-        </Button>
-    )
-}
 
 export default function Agenda() {
     const router = useRouter()
