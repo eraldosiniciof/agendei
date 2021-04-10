@@ -8,11 +8,14 @@
     "start": "next start"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^1.0.9",
     "@chakra-ui/react": "^1.4.2",
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.1.5",
+    "@refetty/react": "^1.0.0-rc.11",
     "@svgr/webpack": "^5.5.0",
     "axios": "^0.21.1",
+    "date-fns": "^2.20.1",
     "firebase": "^8.3.2",
     "firebase-admin": "^9.6.0",
     "formik": "^2.2.6",
