@@ -7,7 +7,7 @@ import { addDays, format, subDays } from 'date-fns'
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
 import { Button, Container, Box, IconButton, SimpleGrid, Spinner, ModalOverlay, ModalContent, ModalFooter } from '@chakra-ui/react'
 
-import { formatDate, useAuth, Logo, TimeBlock} from './../components'
+import { formatDate, useAuth, Logo, TimeBlock } from './../components'
 
 const getSchedule = async (when) => axios({
     method: 'get',
@@ -21,7 +21,7 @@ const Header = ({ children }) => (
     </Box>
 )
 
-export default function Agenda() {
+export default function Schedule() {
     const router = useRouter()
     const [auth, { logout }] = useAuth()
     const [when, setWhen] = useState(() => new Date())
