@@ -16,7 +16,7 @@ const getAgenda = async (when) => {
     return axios({
         method: 'get',
         url: '/api/agenda',
-        params: { date: format(when, 'yyyy-MM-dd'), },
+        params: { when },
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -49,7 +49,7 @@ export default function Agenda() {
     return (
         <Container>
             <Header>
-                <Logo />
+                <Logo size={175} />
                 <Button onClick={logout}>Sair</Button>
             </Header>
 
