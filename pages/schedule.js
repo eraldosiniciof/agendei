@@ -12,7 +12,10 @@ import { formatDate, useAuth, Logo, TimeBlock } from './../components'
 const getSchedule = async (when) => axios({
     method: 'get',
     url: '/api/schedule',
-    params: { when, username: window.location.pathname },
+    params: {
+        username: window.location.pathname.replace('/', ''),
+        date: format(when, 'yyyy-MM-dd')
+    },
 })
 
 const Header = ({ children }) => (
@@ -49,7 +52,7 @@ export default function Schedule() {
 
             <SimpleGrid padding={4} columns={2} spacing={4}>
                 {loading && <Spinner tickness="4px" speed="0.65s" emptyColor="gray.200" color="blue.500" size="xl" />}
-                {data?.map(time => <TimeBlock key={time} time={time} date={when}/>)}
+                {data?.map(({ time, isBlocked }) => <TimeBlock key={time} time={time} date={when} disabled={isBlocked}/>)}
             </SimpleGrid>
         </Container>
     )
