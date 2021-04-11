@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import axios from 'axios'
+import { format } from 'date-fns'
 
 import {
     Button,
@@ -15,7 +16,6 @@ import {
 } from '@chakra-ui/react'
 
 import { Input } from '../Input'
-import { format } from 'date-fns'
 
 const setSchedule = async ({ date, ...data }) => axios({
     method: 'post',
@@ -63,7 +63,7 @@ export const TimeBlock = ({ time, date, disabled, onSuccess }) => {
         },
         initialValues: {
             name: '',
-            email: ''
+            phone: ''
         },
         validationSchema: yup.object().shape({
             name: yup.string().required('Preenchimento obrigatório'),
