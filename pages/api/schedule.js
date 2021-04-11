@@ -21,6 +21,10 @@ const getUserId = async (username) => {
         .where('username', '==', username)
         .get()
 
+    if (!profileDoc.docs.length) {
+        return false
+    }
+
     const { userId } = profileDoc.docs[0].data()
 
     return userId
@@ -50,13 +54,17 @@ const getSchedule = async (req, res) => {
     try {
         const userId = await getUserId(req.query.username)
 
-        const snapshot = await agenda
-            .where('userId', '==', userId)
-            .where('date', '==', req.query.date)
-            .get()
+        if (!userId) {
+            return res.status(404).json({message: 'Invalid username'})
+        }
+
+            const snapshot = await agenda
+                .where('userId', '==', userId)
+                .where('date', '==', req.query.date)
+                .get()
 
         const docs = snapshot.docs.map(doc => doc.data())
-        
+
         const result = timeBlocksList.map(time => ({
             time,
             isBlocked: !!docs.find(doc => doc.time === time)

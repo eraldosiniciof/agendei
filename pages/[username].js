@@ -7,13 +7,13 @@ import { addDays, format, subDays } from 'date-fns'
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
 import { Button, Container, Box, IconButton, SimpleGrid, Spinner, ModalOverlay, ModalContent, ModalFooter } from '@chakra-ui/react'
 
-import { formatDate, useAuth, Logo, TimeBlock } from './../components'
+import { formatDate, useAuth, Logo, TimeBlock } from '../components'
 
-const getSchedule = async (when) => axios({
+const getSchedule = async ({ when, username }) => axios({
     method: 'get',
     url: '/api/schedule',
     params: {
-        username: window.location.pathname.replace('/', ''),
+        username,
         date: format(when, 'yyyy-MM-dd')
     },
 })
@@ -34,8 +34,8 @@ export default function Schedule() {
     const removeDay = () => setWhen(prevState => subDays(prevState, 1))
 
     useEffect(() => {
-        fetch(when)
-    }, [when])
+        fetch({ when, username: router.query.username })
+    }, [when, router.query.username])
 
     return (
         <Container>
@@ -52,7 +52,7 @@ export default function Schedule() {
 
             <SimpleGrid padding={4} columns={2} spacing={4}>
                 {loading && <Spinner tickness="4px" speed="0.65s" emptyColor="gray.200" color="blue.500" size="xl" />}
-                {data?.map(({ time, isBlocked }) => <TimeBlock key={time} time={time} date={when} disabled={isBlocked}/>)}
+                {data?.map(({ time, isBlocked }) => <TimeBlock key={time} time={time} date={when} disabled={isBlocked} />)}
             </SimpleGrid>
         </Container>
     )
