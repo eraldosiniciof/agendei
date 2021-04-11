@@ -15,12 +15,14 @@ import {
 } from '@chakra-ui/react'
 
 import { Input } from '../Input'
+import { format } from 'date-fns'
 
-const setSchedule = async data => axios({
+const setSchedule = async ({ date, ...data }) => axios({
     method: 'post',
     url: 'api/schedule',
     data: {
         ...data,
+        date: format(date, 'yyyy-MM-dd'),
         username: window.location.pathname.replace('/', '')
     }
 })
@@ -45,14 +47,14 @@ const ModalTimeBlock = ({ isOpen, onClose, onComplete, isSubmitting, children })
     </Modal>
 )
 
-export const TimeBlock = ({ time }) => {
+export const TimeBlock = ({ time, date }) => {
     const [isOpen, setIsOpen] = useState(false)
     const toggle = () => setIsOpen(prevState => !prevState)
 
     const { values, handleSubmit, handleChange, handleBlur, errors, touched, isSubmitting } = useFormik({
         onSubmit: async (values) => {
             try {
-                await setSchedule({ ...values, when: time })
+                await setSchedule({ ...values, time, date })
                 toggle()
             } catch (error) {
                 console.log(error)
@@ -67,8 +69,6 @@ export const TimeBlock = ({ time }) => {
             phone: yup.string().required('Preenchimento obrigatório')
         })
     })
-
-    console.log(isSubmitting)
 
     return (
         <Button p={8} bg="blue.500" color="white" onClick={toggle}>
