@@ -35,6 +35,7 @@ export default function Schedule() {
     const refresh = () => fetch({ when, username: router.query.username })
 
     useEffect(() => {
+        if (!router.query.username) return
         refresh()
     }, [when, router.query.username])
 
